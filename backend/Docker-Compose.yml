@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:16
+    container_name: KTM-postgres-DBI
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: KTMdb
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
