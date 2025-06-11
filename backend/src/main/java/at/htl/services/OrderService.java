@@ -9,8 +9,10 @@ import at.htl.mappers.OrderMapper;
 import at.htl.repositories.*;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
 
 import java.util.List;
 
@@ -29,6 +31,13 @@ public class OrderService {
     DishRepository dishRepository;
     @Inject
     EmployeeRepository employeeRepository;
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteById(@PathParam("id") Long id) {
+        orderRepository.deleteOrder(id);
+        return Response.noContent().build();
+    }
 
     @POST
     public OrderDto addOrder(PostOrderDto dto) {

@@ -12,8 +12,13 @@ import java.util.List;
 
 @ApplicationScoped
 public class OrderRepository {
+
     @Inject
     EntityManager em;
+    @Inject
+    EmployeeRepository employeeRepository;
+    @Inject
+    CustomerRepository customerRepository;
 
     @Transactional
     public void save(List<Order> orders) {
@@ -145,5 +150,39 @@ public class OrderRepository {
             System.out.println(e);
             return null;
         }
+    }
+
+    @Transactional
+    public Order findById(Long id) {
+        return em.find(Order.class, id);
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        em.remove(findById(id));
+    }
+
+    @Transactional
+    public void deleteOrder(Long orderId) {
+        Order order = findById(orderId);
+
+        if (order == null) return;
+
+        List<Employee> employees = employeeRepository.findAll();
+        for (Employee e : employees) {
+            if (e.getOrders().contains(order)) {
+                e.getOrders().remove(order);
+                employeeRepository.update(e);
+            }
+        }
+
+        Customer customer = order.getCustomer();
+        if (customer != null && customer.getOrders() != null) {
+            customer.getOrders().remove(order);
+            order.setCustomer(null);
+            customerRepository.update(customer);
+        }
+
+        deleteById(order.getId());
     }
 }
