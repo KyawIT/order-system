@@ -36,6 +36,9 @@ public class OrderService {
         List<Dish> dishes = dishRepository.findByIdList(dto.getDishIds());
         Customer customer = customerRepository.findCustomerById(dto.getCustomerId());
 
+        customer.addKtmScore(dto.getKtmScore());
+        customerRepository.update(customer);
+
         Order order = OrderMapper.fromPostDto(dto, dishes, drinks, customer);
 
         List<Employee> employees = employeeRepository.getEmployeesWithLeastOrder();

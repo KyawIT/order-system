@@ -1,15 +1,17 @@
 package at.htl.database;
 
+import at.htl.dtos.PostOrderDto;
 import at.htl.entities.*;
 import at.htl.repositories.*;
+import at.htl.services.OrderService;
 import io.quarkus.runtime.Startup;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
 import jakarta.transaction.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Startup
@@ -30,19 +32,21 @@ public class DataInitializer {
     DishRepository dishRepository;
     @Inject
     DrinkRepository drinkRepository;
-
+    @Inject
+    OrderService orderService;
 
     @PostConstruct
     @Transactional
     void init() {
         if (customerRepository.findAll().isEmpty() && orderRepository.findAll().isEmpty() &&
-                employeeRepository.findAll().isEmpty() && departmentRepository.findAll().isEmpty()){
+                employeeRepository.findAll().isEmpty() && departmentRepository.findAll().isEmpty()) {
             addDishes();
             addDrinks();
             List<Department> departments = addDepartment();
             List<DepManager> depManagers = addDepManager(departments);
             addEmployees(departments, depManagers);
             addCustomers();
+            addOrders();
         }
     }
 
@@ -121,6 +125,7 @@ public class DataInitializer {
 
         dishRepository.save(dishes);
     }
+
     private void addDrinks() {
         List<Drink> drinks = new ArrayList<>();
 
@@ -144,6 +149,7 @@ public class DataInitializer {
 
         drinkRepository.save(drinks);
     }
+
     private List<Department> addDepartment() {
         List<Department> departments = new ArrayList<>();
 
@@ -158,6 +164,7 @@ public class DataInitializer {
         departmentRepository.save(departments);
         return departments;
     }
+
     private List<DepManager> addDepManager(List<Department> departments) {
         List<DepManager> depManagers = new ArrayList<>();
 
@@ -180,6 +187,7 @@ public class DataInitializer {
         depManagerRepository.save(depManagers);
         return depManagers;
     }
+
     public void addCustomers() {
         List<Customer> customers = new ArrayList<>();
 
@@ -240,6 +248,7 @@ public class DataInitializer {
 
         customerRepository.save(customers);
     }
+
     public void addEmployees(List<Department> departments, List<DepManager> depManagers) {
         List<Employee> employees = new ArrayList<>();
 
@@ -307,5 +316,43 @@ public class DataInitializer {
         employees.add(employee7);
 
         employeeRepository.save(employees);
+    }
+
+    private void addOrders() {
+        List<PostOrderDto> postOrderDto = new ArrayList<>();
+
+        PostOrderDto dto = new PostOrderDto();
+        dto.setCustomerId(1L);
+        dto.setDishIds(new Long[]{1L, 2L});
+        dto.setDrinkIds(new Long[]{1L});
+        dto.setKtmScore(15);
+        dto.setPrice(14.99);
+        dto.setDate(new Date());
+
+        postOrderDto.add(dto);
+
+        PostOrderDto dto2 = new PostOrderDto();
+        dto2.setCustomerId(2L);
+        dto2.setDishIds(new Long[]{3L, 7L});
+        dto2.setDrinkIds(new Long[]{2L});
+        dto2.setKtmScore(20);
+        dto2.setPrice(20.10);
+        dto2.setDate(new Date());
+
+        postOrderDto.add(dto2);
+
+        PostOrderDto dto3 = new PostOrderDto();
+        dto3.setCustomerId(3L);
+        dto3.setDishIds(new Long[]{3L, 7L, 1L, 4L});
+        dto3.setDrinkIds(new Long[]{3L});
+        dto3.setKtmScore(25);
+        dto3.setPrice(25.00);
+        dto3.setDate(new Date());
+
+        postOrderDto.add(dto3);
+
+        for(PostOrderDto postOrderDto2 : postOrderDto) {
+            orderService.addOrder(postOrderDto2);
+        }
     }
 }

@@ -141,4 +141,8 @@ public class Customer {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
+
+    public void addKtmScore(int ktmScore) {
+        this.ktmScore += ktmScore;
+    }
 }
