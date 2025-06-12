@@ -1,0 +1,26 @@
+<div class="grid grid-rows-[25%_1fr_auto] h-screen">
+  <div></div>
+  <div>
+    <h1 class="text-center mb-10 font-mono text-6xl">Signup</h1>
+    <div class="text-center">
+      <input type="text" class="input validator w-100" required placeholder="Username"
+             pattern="[A-Za-z][A-Za-z0-9\-]*" minlength="3" maxlength="30" title="Only letters, numbers or dash" />
+      <p class="validator-hint">
+        Must be 3 to 30 characters
+        <br/>containing only letters, numbers or dash
+      </p>
+      <input type="password" class="input validator w-100" required placeholder="Password" minlength="8"
+             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+             title="Must be more than 8 characters, including number, lowercase letter, uppercase letter" />
+      <p class="validator-hint">
+        Must be more than 8 characters, including
+        <br/>At least one number
+        <br/>At least one lowercase letter
+        <br/>At least one uppercase letter
+      </p>
+      <button class="btn btn-primary w-100">Signup</button>
+    </div>
+  </div>
+  <div></div>
+</div>
+

@@ -1,0 +1,19 @@
+<div class="grid grid-rows-[25%_1fr_auto] h-screen">
+  <div></div>
+  <div>
+    <h1 class="text-center mb-10 font-mono text-6xl">Login</h1>
+    <div class="text-center">
+      <input [(ngModel)]="username" type="text" class="input validator w-100" required placeholder="Username"
+        />
+      <p class="validator-hint">
+        Must be 3 to 30 characters
+        <br />containing only letters, numbers or dash
+      </p>
+      <input [(ngModel)]="password" type="password" class="input validator w-100" required placeholder="Password"
+        minlength="8" />
+        <div></div>
+      <button (click)="handleLogin()" class="btn btn-primary w-100">Login</button>
+    </div>
+  </div>
+  <div></div>
+</div>
