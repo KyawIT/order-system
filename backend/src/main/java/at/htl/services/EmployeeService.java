@@ -70,4 +70,10 @@ public class EmployeeService {
         employeeRepository.update(employee);
     }
 
+    @GET
+    @Path("/getDepartment/{id}")
+    public Long getDepartmentId(@PathParam("id") Long id) {
+        Employee employee = employeeRepository.getEmployeeById(id);
+        return employee.getDepartment().getId();
+    }
 }
