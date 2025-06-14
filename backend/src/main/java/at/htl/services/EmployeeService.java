@@ -11,6 +11,7 @@ import at.htl.repositories.DepManagerRepository;
 import at.htl.repositories.DepartmentRepository;
 import at.htl.repositories.EmployeeRepository;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -41,6 +42,7 @@ public class EmployeeService {
 
     @GET
     @Path("/all")
+    @Transactional
     public List<EmployeeDto> getAllEmployees() {
         return EmployeeMapper.toDtoList(employeeRepository.findAll());
     }
