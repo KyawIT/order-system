@@ -40,6 +40,12 @@ public class EmployeeService {
     }
 
     @GET
+    @Path("/all")
+    public List<EmployeeDto> getAllEmployees() {
+        return EmployeeMapper.toDtoList(employeeRepository.findAll());
+    }
+
+    @GET
     @Path("/{id}")
     public EmployeeDto getEmployee(@PathParam("id") Long id) {
         Employee employee = employeeRepository.getEmployeeById(id);
