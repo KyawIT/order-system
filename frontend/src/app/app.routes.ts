@@ -5,6 +5,7 @@ import {SignupComponent} from './components/signup/signup.component';
 import {CustomerComponent} from './components/customer/customer.component';
 import { OrderComponent } from './components/order/order.component';
 import { ManagerComponent } from './components/manager/manager.component';
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -12,5 +13,6 @@ export const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'customer/:id', component: CustomerComponent},
   {path: 'customer/:id/orders', component: OrderComponent},
-  {path: 'manager/:id', component: ManagerComponent}
+  {path: 'manager/:id', component: ManagerComponent},
+  {path: 'manager/:id/addemployee', component: AddEmployeeComponent},
 ];

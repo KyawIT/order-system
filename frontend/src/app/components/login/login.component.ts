@@ -16,12 +16,12 @@ export class LoginComponent {
   constructor(private router: Router, private loginService: LoginService) {}
 
   handleLogin() {
+    console.log(this.username());
+    console.log(this.password());
     if (!this.username() || !this.password()){
       alert("Please enter a valid credentials");
     }
 
-    console.log(this.username());
-    console.log(this.password());
 
     this.loginService.login(this.username(), this.password()).subscribe({
       next: (response) => {

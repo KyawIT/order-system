@@ -58,6 +58,7 @@ public class EmployeeService {
     }
 
     @POST()
+    @Transactional
     public EmployeeDto addEmployee(PostEmployeeDto dto) {
         DepManager depManager = depManagerRepository.findById(dto.getDepManager());
         Department department = departmentRepository.findById(dto.getDepartmentId());

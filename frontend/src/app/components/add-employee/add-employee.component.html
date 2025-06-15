@@ -1,0 +1,27 @@
+<div class="w-screen flex justify-center mt-[10%]">
+
+    <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+        <legend class="fieldset-legend">Apply new Employee</legend>
+
+        <label class="label">Name</label>
+        <input [(ngModel)]="name" type="text" class="input" />
+
+        <label class="label">Username</label>
+        <input [(ngModel)]="username" type="text" class="input" />
+
+        <label cnamelass="label">Password</label>
+        <input [(ngModel)]="password" type="password" class="input" />
+
+        <label class="label">DepManger</label>
+        <input [disabled]="true" [(ngModel)]="departmentId" type="number" class="input"  />
+
+        <label class="label">DepId</label>
+        <input [disabled]="true" [(ngModel)]="departmentId" type="number" class="input" />
+
+        <label class="label">Salary</label>
+        <input [(ngModel)]="salary" type="number" class="input"  />
+
+        <button class="btn btn-primary" (click)="addEmployee()">Submit</button>
+    </fieldset>
+
+</div>
