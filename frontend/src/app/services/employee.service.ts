@@ -27,4 +27,8 @@ export class EmployeeService {
       salary: salary.toString()
      });
   }
+
+  getEmployeeById(employeeId: number): Observable<Employee> {
+    return this.http.get<Employee>(`${this.apiUrl}employees/${employeeId}`);
+  }
 }

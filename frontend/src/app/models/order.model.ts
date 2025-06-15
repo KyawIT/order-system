@@ -3,6 +3,7 @@ export interface Order {
     price: number;
     dishName: string;
     drinkName: string;
+    customerName: string| null;
 }
 
 export interface OrderDto {

@@ -1,0 +1,59 @@
+<div class="w-screen">
+    <div class="bg-green-400 min-h-50 mt-10 mx-20 rounded-2xl flex items-center">
+        <div class="avatar">
+            <div class="w-50 rounded">
+                <img src="https://imgs.search.brave.com/qyh9VLLO99eKdNfk8Ma9lP0BUn_LlVEH93c4JIpbkP4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vbXJqdW5r/eWNodW5reS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjEv/MTAvaGFtaWQtbW9z/c2FkZWdoLXZlcm1v/Z2VuLTIuanBnP3Jl/c2l6ZT01MDgsMzg2/JnNzbD0x"
+                    class="rounded-2xl" />
+            </div>
+        </div>
+        <div class="mx-10 flex justify-center">
+            <p class="font-mono text-black text-5xl px-5">Name: {{ this.employee()?.name }}</p>
+            <p class="font-mono text-black text-5xl px-5">|</p>
+            <p class="font-mono text-black text-5xl">Employee: {{ this.username() }}</p>
+            <p class="font-mono text-black text-5xl px-5">|</p>
+            <p class="font-mono text-black text-5xl px-5">Salary: {{ this.employee()?.salary }}€</p>
+        </div>
+    </div>
+
+
+    @if (orders() === null) {
+    <div class="mt-10 mx-20">
+        <p class="text-5xl">
+            No orders found for this employee.
+        </p>
+    </div>
+    }
+
+    @if (orders() !== null) {
+    <div>
+        <p class="mt-10 text-5xl">Employees</p>
+        <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+            <table class="table table-zebra w-full table-lg">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Price</th>
+                        <th>DishName</th>
+                        <th>CustomerName</th>
+                        <th>DrinkName</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (order of orders(); track $index) {
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.price }}€</td>
+                        <td>{{ order.dishName }}</td>
+                        <td>{{ order.customerName }}</td>
+                        <td>{{ order.drinkName }}</td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    }
+
+
+</div>
