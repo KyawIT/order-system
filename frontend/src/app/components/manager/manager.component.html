@@ -1,42 +1,53 @@
 <div class="w-screen">
-    <div [routerLink]="['addemployee']" class="hover:cursor-pointer min-h-30 mt-10 mx-20 bg-indigo-400 rounded-2xl flex items-center justify-center hover:bg-indigo-500">
-      <p class="text-white text-6xl">NEW EMP. +</p>
-    </div>
-    <div class="bg-rose-500 min-h-50 mt-10 mx-20 rounded-2xl flex items-center">
-        <div class="avatar">
-          <div class="w-50 rounded">
-            <img src="https://imgs.search.brave.com/UW8Y20bP0v-lb8K2b_9Qp0BLl288P8Jnmne_MVNTf4E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/YnVzaW5lc3NpbnNp/ZGVyLmRlL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDI1LzA2LzQ1/OTM4NjY2NS1zY2Fs/ZWQuanBnP3Zlcj0x/NzQ5NTY0Njg4" class="rounded-2xl"/>
-          </div>
-        </div>
-        <div class="mx-10">
-          <p class="font-mono text-black text-5xl">Manager: {{ this.username() }}</p>
-        </div>
-    </div>
 
-    <div>
-        <p class="mt-10 text-5xl">Employees</p>
-        <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
-            <table class="table table-zebra w-full table-lg">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Salary</th>
-                    <th>Dep. Name</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @for (emp of employeeByDepartment(); track $index) {
-                    <tr>
-                      <td>{{ emp.id }}</td>
-                      <td>{{ emp.name }}</td>
-                      <td>{{ emp.salary}} €</td>
-                      <td>{{ emp.departmentName }}</td>
-                    </tr>
-                  }
-                          
-                </tbody>
-            </table>
-        </div>
+  
+<app-salary-modal [employee]="selectedEmployee()"></app-salary-modal>
+
+
+
+  <div [routerLink]="['addemployee']"
+    class="hover:cursor-pointer min-h-30 mt-10 mx-20 bg-indigo-400 rounded-2xl flex items-center justify-center hover:bg-indigo-500">
+    <p class="text-white text-6xl">NEW EMP. +</p>
+  </div>
+  <div class="bg-rose-500 min-h-50 mt-10 mx-20 rounded-2xl flex items-center">
+    <div class="avatar">
+      <div class="w-50 rounded">
+        <img
+          src="https://imgs.search.brave.com/UW8Y20bP0v-lb8K2b_9Qp0BLl288P8Jnmne_MVNTf4E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/YnVzaW5lc3NpbnNp/ZGVyLmRlL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDI1LzA2LzQ1/OTM4NjY2NS1zY2Fs/ZWQuanBnP3Zlcj0x/NzQ5NTY0Njg4"
+          class="rounded-2xl" />
+      </div>
     </div>
+    <div class="mx-10">
+      <p class="font-mono text-black text-5xl">Manager: {{ this.username() }}</p>
+    </div>
+  </div>
+
+  <div>
+    <p class="mt-10 text-5xl">Employees</p>
+    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+      <table class="table table-zebra w-full table-lg">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Salary</th>
+            <th>Dep. Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (emp of employeeByDepartment(); track $index) {
+          <tr>
+            <td>{{ emp.id }}</td>
+            <td>{{ emp.name }}</td>
+            <td>{{ emp.salary}} €
+              <button class="btn btn-primary" (click)="openSalaryModal(emp)">Edit Salary</button>
+            </td>
+            <td>{{ emp.departmentName }}</td>
+          </tr>
+          }
+
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

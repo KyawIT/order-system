@@ -1,15 +1,21 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, ViewChild } from '@angular/core';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../../services/employee.service';
 import { RouterModule } from '@angular/router';
+import { SalaryModalComponent } from "../salary-modal/salary-modal.component";
 
 @Component({
   selector: 'app-manager',
-  imports: [RouterModule],
+  imports: [RouterModule, SalaryModalComponent],
   templateUrl: './manager.component.html',
   styleUrl: './manager.component.css'
 })
 export class ManagerComponent implements OnInit{
+  selectedEmployee = signal<Employee | null>(null);
+  @ViewChild(SalaryModalComponent)
+  salaryModal!: SalaryModalComponent;
+
+
   public username = signal<string|null>("");
   public employees = signal<Employee[]>([]);
   public managerDepId = signal<number|null>(null);
@@ -65,5 +71,10 @@ export class ManagerComponent implements OnInit{
       error: (error) => {
       }
     });
+  }
+
+  openSalaryModal(emp: Employee) {
+    this.selectedEmployee.set(emp);
+    this.salaryModal.openModal();
   }
 }

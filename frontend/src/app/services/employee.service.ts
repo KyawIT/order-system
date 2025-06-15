@@ -21,4 +21,10 @@ export class EmployeeService {
   addEmployee(employee: EmployeeDto): Observable<EmployeeDto> {
     return this.http.post<EmployeeDto>(`${this.apiUrl}employees`, employee);
   }
+
+  updateEmployeeSalary(employeeId: number, salary: number): Observable<any> {
+    return this.http.patch(`${this.apiUrl}employees/${employeeId}`, { 
+      salary: salary.toString()
+     });
+  }
 }

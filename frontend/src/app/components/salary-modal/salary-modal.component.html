@@ -1,0 +1,16 @@
+@if (isModalOpen) {
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-indigo-300">
+    <div class="bg-white rounded-xl p-6 max-w-lg w-full shadow-lg">
+        <h2 class="text-xl font-bold mb-4 text-black">Edit Salary</h2>
+        <p class="text-black">Selected Employee: {{ employee?.name }}</p>
+        <p class="text-black">Current Salary: {{ employee?.salary }} €</p>
+        <input type="number" [(ngModel)]="salary" class="input input-bordered w-full max-w-xs" placeholder="Enter new salary" />
+        <div class="mt-4">
+            <button class="btn btn-primary" (click)="updateSalary()">Update Salary</button>
+        </div>
+        <div class="mt-4 flex justify-end">
+            <button class="btn btn-error" (click)="closeModal()">Close</button>
+        </div>
+    </div>
+</div>
+}

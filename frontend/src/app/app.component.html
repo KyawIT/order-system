@@ -10,7 +10,6 @@
       }
       @if (username().length < 1){
         <a [routerLink]="'login'" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>
-        <a [routerLink]="'signup'" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Sign-Up</a>
       }
       @if (username().length > 0){
         <a (click)="handleLogout()" href="#" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Log-Out</a>
