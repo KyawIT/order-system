@@ -15,6 +15,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.List;
 
@@ -62,6 +63,9 @@ public class EmployeeService {
     public EmployeeDto addEmployee(PostEmployeeDto dto) {
         DepManager depManager = depManagerRepository.findById(dto.getDepManager());
         Department department = departmentRepository.findById(dto.getDepartmentId());
+
+        String passwort = DigestUtils.sha256Hex(dto.getPassword());
+        dto.setPassword(passwort);
 
         Employee employee = EmployeeMapper.fromPostDto(dto, department, depManager);
         employeeRepository.save(employee);

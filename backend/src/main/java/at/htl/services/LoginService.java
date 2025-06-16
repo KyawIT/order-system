@@ -10,6 +10,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.apache.commons.codec.digest.DigestUtils;
 
 @Path("/login")
 @Produces(MediaType.APPLICATION_JSON)
@@ -23,6 +24,10 @@ public class LoginService {
         if(dto.getUsername().length() != 4) {
             throw new WebApplicationException("Password falsch oder User falsch", Response.Status.NOT_FOUND);
         }
+
+        String passwort = DigestUtils.sha256Hex(dto.getPassword());
+        dto.setPassword(passwort);
+        System.out.println("passwort: " + passwort);
 
         LoginDto loginDto = new LoginDto();
         if(dto.getUsername().charAt(2)=='0'){
