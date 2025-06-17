@@ -9,8 +9,12 @@
         <img src="https://img.daisyui.com/images/profile/demo/batperson@192.webp" class="rounded-2xl"/>
       </div>
     </div>
-    <div class="mx-10">
+    <div class="mx-10 flex justify-center">
       <p class="font-mono text-black text-5xl">Customer: {{ this.username() }}</p>
+      <p class="font-mono text-black text-5xl px-5">|</p>
+      <p class="font-mono text-black text-5xl">Name: {{ this.customer()!.name }}</p>
+      <p class="font-mono text-black text-5xl px-5">|</p>
+      <p class="font-mono text-black text-5xl">Age: {{ this.customer()!.age }}</p>
     </div>
   </div>
 

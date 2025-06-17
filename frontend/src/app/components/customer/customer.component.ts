@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import {ActivatedRoute, RouterModule} from '@angular/router';
 import { OrderService } from '../../services/order.service';
 import { Order } from '../../models/order.model';
+import { CustomerService } from '../../services/customer.service';
+import { Customer } from '../../models/customer.model';
 
 // @ts-ignore
 @Component({
@@ -16,8 +18,9 @@ export class CustomerComponent implements OnInit {
   private route = inject(ActivatedRoute);
   public username = signal<string|null>("");
   public orders = signal<Order[]>([]);
+  public customer = signal<Customer|null>(null);
 
-  constructor(private orderService: OrderService) {
+  constructor(private orderService: OrderService, private customerService: CustomerService) {
   }
 
   ngOnInit(): void {
@@ -37,6 +40,15 @@ export class CustomerComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching orders:', error);
+      }
+    });
+
+    this.customerService.getCustomerById(Number(localStorage.getItem("id"))).subscribe({
+      next: (data) => {
+        this.customer.set(data);
+      },
+      error: (error) => {
+        console.error('Error fetching customer:', error);
       }
     });
   }
